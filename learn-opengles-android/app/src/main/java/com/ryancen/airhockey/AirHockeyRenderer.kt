@@ -87,14 +87,14 @@ class AirHockeyRenderer(context: Context): GLSurfaceView.Renderer {
 
     override fun onSurfaceCreated(p0: GL10?, p1: EGLConfig?) {
         Log.i(TAG, "onSurfaceCreated: $p0, $p1")
-        GLES20.glClearColor(1f, 0.0f, 0.0f, 0.0f)
+        GLES20.glClearColor(0f, 0.0f, 0.0f, 0.0f)
 
         val vertexShader = ShaderHelper.compileVertexShader(vertexShaderSource)
         val fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource)
         program = ShaderHelper.linkProgram(vertexShader, fragmentShader)
 
 //        if (BuildConfig.DEBUG) {
-            ShaderHelper.validateProgram(program)
+        ShaderHelper.validateProgram(program)
 //        }
         // 调用 glUseProgram 告诉 OpenGL 在绘制任何东西到屏幕上的时候要使用这里定义的程序。
         GLES20.glUseProgram(program)
@@ -106,14 +106,14 @@ class AirHockeyRenderer(context: Context): GLSurfaceView.Renderer {
          * 当我们稍后要更新这个uniform 值的时候，我们会使用它
          * @see simple_fragment_shader.glsl
          */
-        uColorLocation = glGetUniformLocation(program, "u_Color")
+        uColorLocation = glGetUniformLocation(program, U_COLOR)
 
         /**
          * 获取属性位置
          * 有了这个位置，就能告诉OpenGL 到哪里 去 找 到 这 个 属 性 对 应 的 数 据 了。
          * @see simple_vertex_shader.glsl
          */
-        aPositionLocation = glGetAttribLocation(program, "a_Position")
+        aPositionLocation = glGetAttribLocation(program, A_POSITION)
 
         // 把缓存的位置移动到开头，从这里开始读取数据
         vertexData.position(0)
