@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.ryancen.airhockey.AirHockeyRenderer
 import com.ryancen.myapplication.R
 
 private const val TAG = "FirstProjectActivity"
@@ -28,7 +29,7 @@ class FirstProjectActivity : AppCompatActivity() {
 
         if (supportsEs2) {
             glSurfaceView.setEGLContextClientVersion(2)
-            glSurfaceView.setRenderer(FirstProjectRenderer())
+            glSurfaceView.setRenderer(AirHockeyRenderer(context = this))
             rendererSet = true
         } else {
             Toast.makeText(this, "This device don't support OpenGL ES 2.0", Toast.LENGTH_SHORT)
